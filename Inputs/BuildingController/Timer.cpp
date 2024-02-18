@@ -1,5 +1,13 @@
 #include "Timer.hpp"
 
+
+Copy code
+/**
+ * @id Timer
+ * @failure-probability 0.1
+ * @dependencies []
+ */
+
 Timer::Timer() {
     // Set default onTime and offTime (e.g., 6 PM to 6 AM)
     onTime = std::time(nullptr); // Placeholder for actual time setting

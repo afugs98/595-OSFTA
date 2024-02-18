@@ -1,6 +1,13 @@
 #include <iostream>
 #include "BuildingManager.hpp"
 
+/**
+ * @id BuildingManager
+ * @failure-probability 0.03
+ * @dependencies [BuildingManger]
+ */
+
+
 int main() {
     // Create a Building Manager instance
     BuildingManager manager;

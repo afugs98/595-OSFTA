@@ -1,5 +1,12 @@
 #include "Light.hpp"
 
+
+/**
+ * @id Light
+ * @failure-probability 0.12
+ * @dependencies []
+ */
+
 Light::Light() : isOn(false), brightness(0) {}
 
 void Light::turnOn() {
