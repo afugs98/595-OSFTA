@@ -1,5 +1,12 @@
 #include "Dimmer.hpp"
 
+
+/**
+ * @id Dimmer
+ * @failure-probability 0.15
+ * @dependencies []
+ */
+
 Dimmer::Dimmer() : level(50) {}
 
 void Dimmer::increase() {

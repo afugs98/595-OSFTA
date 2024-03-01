@@ -1,5 +1,12 @@
 #include "LightController.hpp"
 
+
+/**
+ * @id LightController
+ * @failure-probability 0.1
+ * @dependencies [Light, Dimmer, Sensor, Timer]
+ */
+
 LightController::LightController() {
     // Initialize with some default lights, dimmers, timers, sensors
     lights.push_back(Light());
