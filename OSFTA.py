@@ -48,6 +48,30 @@ class OSFTAManager:
 
         pass
 
+    def buildUnprocessedTree(self):
+        # Sean, depending on how we want to do this
+        # you can put your code to build the tree here.
+        #
+        # This may require reworking the FileTreeWalker to be 
+        # "object-friendly" which I am available to do
+
+        pass
+
+
+    def processTree(self):
+        # Sean, Arnab, this is where we will invoke the processing
+        # to take the unprocessed tree and run FTA on it
+        
+        pass
+
+
+    def printOutput(self):
+        # Arnab, this is where you'd integrate the code to
+        # print the tree that Sean has made
+
+        pass
+
+
 
 
 # Run the entire OSFTA program
@@ -66,3 +90,12 @@ if __name__ == '__main__':
     
     # Walk the tree
     manager.walkTree()
+
+    # Build the unprocessed tree
+    manager.buildUnprocessedTree()
+
+    # Process the tree
+    manager.processTree()
+
+    # Print the output
+    manager.printOutput()
