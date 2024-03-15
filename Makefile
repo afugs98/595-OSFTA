@@ -8,4 +8,4 @@
 all: buildingManagerDev
 
 buildingManagerDev:
-	python OSFTA.py /Source/Inputs/BuildingController/ config.txt
+	python OSFTA.py Inputs/BuildingController/ config.txt

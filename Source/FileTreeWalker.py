@@ -4,9 +4,10 @@ import os
 import re
 
 class FileTreeWalker:
-    def __init__(self, baseDirectory, targetDirectory):
-        self.baseDirectory = baseDirectory
-        self.targetDirectory = os.path.join(self.baseDirectory, targetDirectory)
+    def __init__(self, targetDirectory):
+        self.targetDirectory = targetDirectory
+
+        print(self.targetDirectory)
 
     def readFile(self, filePath):
         with open(filePath, 'r') as file:
@@ -93,5 +94,5 @@ if __name__ == "__main__":
     currentDirectory = os.path.dirname(os.path.abspath(__file__))  # Gets the directory of the current file
     inputsRelativePath = os.path.join('..', 'Inputs')  # Path to 'Inputs' from 'Source'
     
-    TreeWalker = FileTreeWalker(currentDirectory, inputsRelativePath)
+    TreeWalker = FileTreeWalker(os.path.join(currentDirectory, inputsRelativePath))
     TreeWalker.walkDirectoryTree()

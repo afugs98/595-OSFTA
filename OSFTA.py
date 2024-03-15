@@ -21,46 +21,48 @@ class OSFTAManager:
         
         # Set up empty class variables to be used later
         self.configManager = None
-        self.fileManifest = None
+        self.fileTreeWalker = None
 
         # Construct filepaths for analysis based on this directory as the root
-        self.analysisFilepath = os.path.join(os.getcwd(), inputAnalysisFilepath)
+        self.analysisFilepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), inputAnalysisFilepath)
         print(self.analysisFilepath)
 
     def buildConfiguration(self, configFilename):
 
-        configFilepath = os.path.join(os.getcwd(), configFilename)
+        print('Building Configuration...')
+
+        configFilepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), configFilename)
 
         # Construct ConfigurationManager as OSFTA member variable
         self.configManager = ConfigurationManager(configFilepath)
 
-        print(self.configManager.getConfigFileExtensions())
 
     def walkTree(self):
+        print('Walking Tree...')
 
+        # Construct the FileTreeWalker
+        self.fileTreeWalker = FileTreeWalker(self.analysisFilepath)
+
+        # Run the tree walker
+        self.fileTreeWalker.walkDirectoryTree()
 
         pass
 
-    # def getOSFTAAnalysisDirectory(self):
-    #     return self.analysisFilepath
 
 
 # Run the entire OSFTA program
 if __name__ == '__main__':
+    
+    print('Running OSFTA...')
 
     analysisPath = sys.argv[1]
     configFilename = sys.argv[2]
 
-    print('Running OSFTA...')
-    
     # Construct empty OSFTAManager
     manager = OSFTAManager(analysisPath)
 
     # Run config reading and steps with passed input filename
     manager.buildConfiguration(configFilename)
     
-    
-    # config_path = 'config.txt'
-    # config_manager = create_configuration_manager(config_path)
-    # print(f"Root Source Directory: {config_manager.root_source_directory}")
-    # print(f"File Extensions to Examine: {config_manager.file_extensions}")
+    # Walk the tree
+    manager.walkTree()
