@@ -41,7 +41,7 @@ class OSFTAManager:
         print('Walking Tree...')
 
         # Construct the FileTreeWalker
-        self.fileTreeWalker = FileTreeWalker(self.analysisFilepath)
+        self.fileTreeWalker = FileTreeWalker(self.analysisFilepath, self.configManager.getConfigFileExtensions())
 
         # Run the tree walker
         self.fileTreeWalker.walkDirectoryTree()
@@ -61,7 +61,7 @@ class OSFTAManager:
     def processTree(self):
         # Sean, Arnab, this is where we will invoke the processing
         # to take the unprocessed tree and run FTA on it
-        
+
         pass
 
 

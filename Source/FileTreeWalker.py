@@ -4,14 +4,16 @@ import os
 import re
 
 class FileTreeWalker:
-    def __init__(self, targetDirectory):
+    def __init__(self, targetDirectory, fileExtensionsList):
         self.targetDirectory = targetDirectory
 
-        print(self.targetDirectory)
+        self.fileExtensions = fileExtensionsList
+
 
     def readFile(self, filePath):
         with open(filePath, 'r') as file:
             return file.read()  # Or perform any file-specific reading logic
+
 
     def processFileData(self, fileData):
         # Process the file data as needed. This is where we would parse the data and construct an object for this file
@@ -36,7 +38,7 @@ class FileTreeWalker:
     def walkDirectoryTree(self):
         for root, dirs, files in os.walk(self.targetDirectory):
             for file in files:
-                if file.endswith('.cpp'):
+                if any(file.endswith(ext) for ext in self.fileExtensions):
                     filePath = os.path.join(root, file)
                     print(filePath)
 
