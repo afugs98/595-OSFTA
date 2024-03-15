@@ -88,7 +88,7 @@ class FileTreeWalker:
         match = re.search(pattern, comment)
         return match.group(1) if match else None
 
-# Usage
+# Usage if the file is the main file, not the regular intent
 if __name__ == "__main__":
     currentDirectory = os.path.dirname(os.path.abspath(__file__))  # Gets the directory of the current file
     inputsRelativePath = os.path.join('..', 'Inputs')  # Path to 'Inputs' from 'Source'
