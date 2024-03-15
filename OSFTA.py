@@ -7,39 +7,57 @@
 # Then compute
 # Then show the results
 
+import sys
+import os
 from Source.FileTreeWalker import *
 from Source.ConfigurationManager import *
 
 
 
+
 class OSFTAManager:
-    def __init__(self):
+
+    def __init__(self, inputAnalysisFilepath):
+        
+        # Set up empty class variables to be used later
         self.configManager = None
         self.fileManifest = None
 
-    def buildConfiguration(self, configFile):
+        # Construct filepaths for analysis based on this directory as the root
+        self.analysisFilepath = os.path.join(os.getcwd(), inputAnalysisFilepath)
+        print(self.analysisFilepath)
 
+    def buildConfiguration(self, configFilename):
 
+        configFilepath = os.path.join(os.getcwd(), configFilename)
 
+        # Construct ConfigurationManager as OSFTA member variable
+        self.configManager = ConfigurationManager(configFilepath)
 
-        pass
+        print(self.configManager.getConfigFileExtensions())
 
     def walkTree(self):
 
 
         pass
 
+    # def getOSFTAAnalysisDirectory(self):
+    #     return self.analysisFilepath
+
 
 # Run the entire OSFTA program
 if __name__ == '__main__':
 
+    analysisPath = sys.argv[1]
+    configFilename = sys.argv[2]
+
     print('Running OSFTA...')
     
     # Construct empty OSFTAManager
-    manager = OSFTAManager()
+    manager = OSFTAManager(analysisPath)
 
-    # Run config reading and steps
-    manager.buildConfiguration('config.txt')
+    # Run config reading and steps with passed input filename
+    manager.buildConfiguration(configFilename)
     
     
     # config_path = 'config.txt'

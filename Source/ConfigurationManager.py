@@ -1,12 +1,17 @@
 class ConfigurationManager:
-    def __init__(self, config_data):
-        self.root_source_directory = config_data['root_source_directory']
-        self.file_extensions = config_data['file_extensions'].split(',')
+    def __init__(self, configFile):
 
-def read_config_file(config_path):
-    config_data = {}
-    with open(config_path, 'r') as file:
-        for line in file:
-            key, value = line.strip().split('=')
-            config_data[key] = value
-    return config_data
+        # First open the config file and read in data
+        config_data = {}
+        with open(configFile, 'r') as file:
+            for line in file:
+                key, value = line.strip().split('=')
+                config_data[key] = value
+
+        self.fileExtensions = config_data['file_extensions'].split(',')
+
+    def getConfigFileExtensions(self):
+        return self.fileExtensions
+
+
+
