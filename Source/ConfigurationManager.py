@@ -8,7 +8,10 @@ class ConfigurationManager:
                 key, value = line.strip().split('=')
                 config_data[key] = value
 
-        self.fileExtensions = config_data['file_extensions'].split(',')
+        # Return the list of file extensions
+        # Unless the string showing the file extensions is empty, then return an empty array
+        self.fileExtensions = [] if config_data['file_extensions'] == '' else config_data['file_extensions'].split(',')
+
 
     def getConfigFileExtensions(self):
         return self.fileExtensions
