@@ -2,6 +2,8 @@
 
 import os
 import re
+from Component import UnprocessedComponent
+from AnalyzeEngine import AnalyzeEngine
 
 class FileTreeWalker:
     def __init__(self, baseDirectory, targetDirectory):
@@ -27,12 +29,12 @@ class FileTreeWalker:
             print("Failure Prob:", parsedCommentDict['failure_probability'])
             print("Dependencies:", parsedCommentDict['dependencies'])
         
-
+            return UnprocessedComponent(id=parsedCommentDict['id'], fail_rate=parsedCommentDict['failure_probability'], unprocessed_dep=parsedCommentDict['dependencies'])
         # This is where we will create objects according to the class structure...
-
-
+        return None
 
     def walkDirectoryTree(self):
+        unprocComponents = {}
         for root, dirs, files in os.walk(self.targetDirectory):
             for file in files:
                 if file.endswith('.cpp'):
@@ -43,7 +45,14 @@ class FileTreeWalker:
                     fileData = self.readFile(filePath)
 
                     # Pass to processor to read filedata and parse comment blocks 
-                    self.processFileData(fileData)
+                    unprocessed = self.processFileData(fileData)
+
+                    if unprocessed:
+                        unprocComponents[unprocessed.id] = unprocessed
+                    else:
+                        print("Error with file", file)
+
+        return unprocComponents
 
 
     ########### Lines for parsing the files found by the tree walker ###########
@@ -77,7 +86,11 @@ class FileTreeWalker:
         # Handle dependencies differently since there are multiple items
         # Todo, make this also somehow parse AND and OR statements
         if all(key in data for key in ['id', 'failure_probability', 'dependencies']):
-            data['dependencies'] = [dep.strip() for dep in data['dependencies'].split(',')] if data['dependencies'] else []
+            # data['dependencies'] = [dep.strip() for dep in data['dependencies'].split(',')] if data['dependencies'] else []
+            if data['dependencies']:
+                data['dependencies'] = data['dependencies'].strip()
+            else:
+                data['dependencies'] = None
             return data
         return None
 
@@ -94,4 +107,10 @@ if __name__ == "__main__":
     inputsRelativePath = os.path.join('..', 'Inputs')  # Path to 'Inputs' from 'Source'
     
     TreeWalker = FileTreeWalker(currentDirectory, inputsRelativePath)
-    TreeWalker.walkDirectoryTree()
+    dic = TreeWalker.walkDirectoryTree()
+    Analyzer = AnalyzeEngine()
+    dic = Analyzer.convert_to_component(dic)
+    print(dic)
+    # root = Analyzer.create_tree(dic)
+    # root.print_tree()
+    print(dic['main'].left.left)

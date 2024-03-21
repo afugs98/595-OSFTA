@@ -1,5 +1,5 @@
-from Component import Component
-from FaultTree import FaultTree
+from Source.Component import Component
+from Source.FaultTree import FaultTree
 
 if __name__ == "__main__":
     subsystem1 = Component("subsystem 1", "02", "25%", ["AND", "OR"])

@@ -4,7 +4,7 @@
 /**
  * @id LightController
  * @failure-probability 0.1
- * @dependencies [Light, Dimmer, Sensor, Timer]
+ * @dependencies [((Light AND Dimmer) AND Timer) OR Sensor]
  */
 
 LightController::LightController() {
