@@ -4,6 +4,7 @@ import os
 import re
 from Component import UnprocessedComponent
 from AnalyzeEngine import AnalyzeEngine
+from FaultTree import FaultTree
 
 class FileTreeWalker:
     def __init__(self, targetDirectory, fileExtensionsList):
@@ -107,15 +108,15 @@ class FileTreeWalker:
 # Usage if the file is the main file, not the regular intent
 if __name__ == "__main__":
     currentDirectory = os.path.dirname(os.path.abspath(__file__))  # Gets the directory of the current file
-    inputsRelativePath = os.path.join('..', 'Inputs')  # Path to 'Inputs' from 'Source'
-    
-    TreeWalker = FileTreeWalker(os.path.join(currentDirectory, inputsRelativePath))    
+    inputsRelativePath = os.path.join('..', 'Inputs', 'BuildingController')  # Path to 'Inputs' from 'Source'
+    TreeWalker = FileTreeWalker(os.path.join(currentDirectory, inputsRelativePath), ".cpp")    
     dic = TreeWalker.walkDirectoryTree()
     Analyzer = AnalyzeEngine()
     dic = Analyzer.convert_to_component(dic)
-    print(dic)
+    root = Analyzer.root
+    # print(root)
+    tree = FaultTree(root)
+    tree.print_tree()
     # root = Analyzer.create_tree(dic)
     # root.print_tree()
-    print(dic['main'].left.left)
-    
-    TreeWalker.walkDirectoryTree()
+    # print(dic['main'].left.left)

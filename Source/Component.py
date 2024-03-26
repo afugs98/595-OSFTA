@@ -1,7 +1,7 @@
 class Component:
     tree_type = "Boolean"
 
-    def __init__(self, id, fail_rate, dep_rel, left, right) -> None:
+    def __init__(self, id, fail_rate, left, right, dep_rel) -> None:
         # self.name = name
         self.id = id
         self.fail_rate = fail_rate
@@ -29,6 +29,7 @@ class Component:
         right = self.right.id if isinstance(self.right, Component) else self.right
         return "ID: {0}, left: {1}, right: {2}, operator: {3}".format(self.id, left, right, self.dep_rel)
         # return self.id
+        # return right if right else "None"
 
 class UnprocessedComponent (Component):
     def __init__(self, id, fail_rate, unprocessed_dep, left=None, right=None, dep_rel=None) -> None:

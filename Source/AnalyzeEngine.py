@@ -19,7 +19,7 @@ class AnalyzeEngine:
 
             if id == 'main':
                 parent = RootComponent(parent.id, -1)
-                self.root = parent
+                self.setRoot(parent)
           
 
             parts = re.findall(r'\w+|\S', dep)
@@ -48,16 +48,24 @@ class AnalyzeEngine:
                     # dic[part].parent = parent
                     cstack.append(dic[part])
                     comp_lim -= 1
-                    if comp_lim <= 0:
+                    if comp_lim == 0:
+                        # print(cstack)
                         comp1 = cstack.pop()
                         comp2 = cstack.pop()
                         operator = ostack.pop()
-                        print(operator)
-                        dummy = DummyComponent("D", -1, left=comp1, right=comp2, dep_rel=operator)
+                        dummy = DummyComponent(id="D", fail_rate=-1, left=comp1, right=comp2, dep_rel=operator)
                         cstack.append(dummy)
                         comp_lim = 1
                 else: 
                     return -1
+            
+            
+            while len(cstack) > 1:
+                comp1 = cstack.pop()
+                comp2 = cstack.pop()
+                operator = ostack.pop()
+                dummy = DummyComponent(id="D", fail_rate=-1, left=comp1, right=comp2, dep_rel=operator)
+                cstack.append(dummy)
             
             #should be one component in cstack
             comp = cstack.pop()
@@ -82,3 +90,10 @@ class AnalyzeEngine:
         root = FaultTree(subs)
         
         return root
+    
+    def getRoot(self):
+        return self.root
+    
+    def setRoot(self, root):
+        self.root = root
+        return

@@ -1,16 +1,14 @@
 import Component
 from collections import deque
+from Component import DummyComponent
 
 class FaultTree:
-    def __init__(self, children=[]) -> None:
-        self.children = children
+    def __init__(self, root) -> None:
+        self.root = root
 
     def print_tree(self):
-        print("Root Subcomponents: ")
-        for sub in self.children:
-            print(sub.id)
             
-        queue = deque(self.children)
+        queue = deque([self.root])
         child_q = deque()
         while queue or child_q:
             if child_q:
@@ -18,6 +16,8 @@ class FaultTree:
             else:
                 node = queue.popleft()
             print("ID:", node.id)
+            if type(node) is DummyComponent:
+                print(node)
             if node.left:
                 child_q.append(node.left)
             if node.right:
