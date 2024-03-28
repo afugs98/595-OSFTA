@@ -112,7 +112,7 @@ if __name__ == "__main__":
     TreeWalker = FileTreeWalker(os.path.join(currentDirectory, inputsRelativePath), ".cpp")    
     dic = TreeWalker.walkDirectoryTree()
     Analyzer = AnalyzeEngine()
-    dic = Analyzer.convert_to_component(dic)
+    dic = Analyzer.createUnprocessedTree(dic)
     root = Analyzer.root
     # print(root)
     tree = FaultTree(root)

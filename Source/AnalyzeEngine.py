@@ -8,7 +8,7 @@ class AnalyzeEngine:
         self.operators = ["AND", "OR", "or", "and"]
         self.root = None
 
-    def convert_to_component(self, dic):
+    def createUnprocessedTree(self, dic):
         # defines the relations
         for id in dic:
             parent = dic[id]
@@ -20,7 +20,6 @@ class AnalyzeEngine:
             if id == 'main':
                 parent = RootComponent(parent.id, -1)
                 self.setRoot(parent)
-          
 
             parts = re.findall(r'\w+|\S', dep)
             pstack = []
@@ -79,17 +78,8 @@ class AnalyzeEngine:
 
             dic[id] = parent
         
-        return dic
+        return self.getRoot()
 
-    def create_tree(self, dic):
-        subs = []  
-        for id in dic:
-            if not dic[id].parent:
-                subs.append(dic[id])
-        
-        root = FaultTree(subs)
-        
-        return root
     
     def getRoot(self):
         return self.root
