@@ -2,9 +2,9 @@
 #include "BuildingManager.hpp"
 
 /**
- * @id BuildingManager
+ * @id main
  * @failure-probability 0.03
- * @dependencies [BuildingManger]
+ * @dependencies [BuildingManager]
  */
 
 

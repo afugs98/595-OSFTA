@@ -1,7 +1,6 @@
 #include "Timer.hpp"
 
 
-Copy code
 /**
  * @id Timer
  * @failure-probability 0.1

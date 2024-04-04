@@ -9,11 +9,12 @@
 
 import sys
 import os
-from Source.FileTreeWalker import *
-from Source.ConfigurationManager import *
-
-
-
+from FileTreeWalker import *
+from ConfigurationManager import *
+from AnalyzeEngine import *
+from Component import *
+from FaultTree import *
+from ComputeEngine import *
 
 class OSFTAManager:
 
@@ -44,25 +45,28 @@ class OSFTAManager:
         self.fileTreeWalker = FileTreeWalker(self.analysisFilepath, self.configManager.getConfigFileExtensions())
 
         # Run the tree walker
-        self.fileTreeWalker.walkDirectoryTree()
+        dic = self.fileTreeWalker.walkDirectoryTree()
 
-        pass
+        return dic
 
-    def buildUnprocessedTree(self):
+    def buildUnprocessedTree(self, dic):
         # Sean, depending on how we want to do this
         # you can put your code to build the tree here.
         #
+        analyze = AnalyzeEngine()
+        root = analyze.createUnprocessedTree(dic)
         # This may require reworking the FileTreeWalker to be 
         # "object-friendly" which I am available to do
 
-        pass
+        return root
 
 
-    def processTree(self):
+    def processTree(self, root):
         # Sean, Arnab, this is where we will invoke the processing
         # to take the unprocessed tree and run FTA on it
-
-        pass
+        compute = ComputeEngine(root)
+        compute.evaluate(root)
+        return
 
 
     def printOutput(self):
@@ -89,13 +93,16 @@ if __name__ == '__main__':
     manager.buildConfiguration(configFilename)
     
     # Walk the tree
-    manager.walkTree()
+    dic = manager.walkTree()
 
     # Build the unprocessed tree
-    manager.buildUnprocessedTree()
+    root = manager.buildUnprocessedTree(dic)
+
+    tree = FaultTree(root)
+    tree.print_tree()
 
     # Process the tree
-    manager.processTree()
+    manager.processTree(root)
 
     # Print the output
     manager.printOutput()
