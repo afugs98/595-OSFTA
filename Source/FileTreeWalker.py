@@ -90,7 +90,6 @@ class FileTreeWalker:
         # Handle dependencies differently since there are multiple items
         # Todo, make this also somehow parse AND and OR statements
         if all(key in data for key in ['id', 'failure_probability', 'dependencies']):
-            # data['dependencies'] = [dep.strip() for dep in data['dependencies'].split(',')] if data['dependencies'] else []
             if data['dependencies']:
                 data['dependencies'] = data['dependencies'].strip()
             else:
@@ -114,9 +113,5 @@ if __name__ == "__main__":
     Analyzer = AnalyzeEngine()
     dic = Analyzer.createUnprocessedTree(dic)
     root = Analyzer.root
-    # print(root)
     tree = FaultTree(root)
     tree.print_tree()
-    # root = Analyzer.create_tree(dic)
-    # root.print_tree()
-    # print(dic['main'].left.left)

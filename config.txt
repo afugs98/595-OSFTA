@@ -1,1 +1,1 @@
-file_extensions=.cpp,.hpp
+file_extensions=.cpp

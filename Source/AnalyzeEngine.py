@@ -34,21 +34,12 @@ class AnalyzeEngine:
                     if pstack:
                         if pstack.pop() != "(":
                             return -1 # mismatched parantheses error
-                   
-                    # comp1 = cstack.pop()
-                    # comp2 = cstack.pop()
-                    # operator = ostack.pop()
-                    # dummyid = "D"
-                    # dummy = UnprocessedComponent(dummyid, -1, None, comp1, comp2, operator, 1)
-                    # cstack.append(dummy)
                 elif part in self.operators:
                     ostack.append(part)
                 elif part in dic:
-                    # dic[part].parent = parent
                     cstack.append(dic[part])
                     comp_lim -= 1
                     if comp_lim == 0:
-                        # print(cstack)
                         comp1 = cstack.pop()
                         comp2 = cstack.pop()
                         operator = ostack.pop()
@@ -56,7 +47,7 @@ class AnalyzeEngine:
                         cstack.append(dummy)
                         comp_lim = 1
                 else: 
-                    return -1
+                    return None
             
             
             while len(cstack) > 1:

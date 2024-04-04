@@ -14,6 +14,7 @@ from ConfigurationManager import *
 from AnalyzeEngine import *
 from Component import *
 from FaultTree import *
+from ComputeEngine import *
 
 class OSFTAManager:
 
@@ -60,11 +61,12 @@ class OSFTAManager:
         return root
 
 
-    def processTree(self):
+    def processTree(self, root):
         # Sean, Arnab, this is where we will invoke the processing
         # to take the unprocessed tree and run FTA on it
-
-        pass
+        compute = ComputeEngine(root)
+        compute.evaluate(root)
+        return
 
 
     def printOutput(self):
@@ -96,9 +98,11 @@ if __name__ == '__main__':
     # Build the unprocessed tree
     root = manager.buildUnprocessedTree(dic)
 
+    tree = FaultTree(root)
+    tree.print_tree()
 
     # Process the tree
-    manager.processTree()
+    manager.processTree(root)
 
     # Print the output
     manager.printOutput()

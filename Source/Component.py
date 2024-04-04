@@ -2,7 +2,6 @@ class Component:
     tree_type = "Boolean"
 
     def __init__(self, id, fail_rate, left, right, dep_rel) -> None:
-        # self.name = name
         self.id = id
         self.fail_rate = fail_rate
         # relationships: AND, OR, NOISY AND, NOISY OR
@@ -28,8 +27,20 @@ class Component:
         left = self.left.id if isinstance(self.left, Component) else self.left
         right = self.right.id if isinstance(self.right, Component) else self.right
         return "ID: {0}, left: {1}, right: {2}, operator: {3}".format(self.id, left, right, self.dep_rel)
-        # return self.id
-        # return right if right else "None"
+
+    def get_probability(self):
+        return self.fail_rate
+    
+    def set_probability(self, fail_rate):
+        self.fail_rate = fail_rate
+        return
+
+    def get_dep_rel(self):
+        return self.dep_rel
+
+    def set_dep_rel(self, dep_rel):
+        self.dep_rel = dep_rel
+        return
 
 class UnprocessedComponent (Component):
     def __init__(self, id, fail_rate, unprocessed_dep, left=None, right=None, dep_rel=None) -> None:
