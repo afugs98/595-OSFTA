@@ -73,8 +73,6 @@ class FileTreeWalker:
         # Todo, maybe remove this and enforce there can only be one block?
         commentBlocks = self.extractCommentBlocks(code, fileExtension)
 
-        print(commentBlocks)
-
         # Parse each comment block
         # Todo, remove this if we enforce only having one block
         parsedData = [self.parseBlock(comment) for comment in commentBlocks]
@@ -83,32 +81,20 @@ class FileTreeWalker:
     def extractCommentBlocks(self, code, fileExtension):
 
         # Find a general "block" of potential comments with FTA data
-
-        # print(code)
+        # This code checks for C style first, then tries to do Python if that does not resolve
+        # Potentially room for improvement later
 
         cCommentPattern = r'/\*\*([\s\S]*?)\*/'
         firstTryCStyle = re.findall(cCommentPattern, code)
 
-        # print(firstTryCStyle)
-        
         # If the C style doesn't find anything, try Python
         if len(firstTryCStyle) == 0:
             
             pythonCommentPattern = r"'''(.*?)'''"
 
-            # matches = re.search(pythonCommentPattern, code, re.DOTALL)
-
-            # if matches:
-            #     extracted_text = matches.group(1)
-            # else:
-            #     extracted_text = 'No text found between the markers.'
-
-            #############
-
-
             secondTryPythonStyle = re.findall(pythonCommentPattern, code, re.DOTALL)
-            print(f'This is the second try: {secondTryPythonStyle}\n')
 
+            # Returns an empty array if not found
             return secondTryPythonStyle
         
         return firstTryCStyle
