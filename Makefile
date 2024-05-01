@@ -5,10 +5,14 @@
 # [python] OSFTA.py [path_to_source_tree] [configFilename]
 
 
-all: buildingManagerDev
+all: buildingManagerDev SatelliteManagerDev
 
 buildingManagerDev:
 	python OSFTA.py Inputs/BuildingController/ config.txt
+
+
+SatelliteManagerDev:
+	python OSFTA.py Inputs/PythonSatelliteController/ config_python.txt
 
 
 

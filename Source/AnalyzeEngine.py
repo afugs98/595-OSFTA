@@ -1,6 +1,6 @@
 import re
-from Component import UnprocessedComponent, DummyComponent, RootComponent
-from FaultTree import FaultTree
+from Source.Component import UnprocessedComponent, DummyComponent, RootComponent
+
 
 class AnalyzeEngine:
 
@@ -49,7 +49,6 @@ class AnalyzeEngine:
                 else: 
                     return None
             
-            
             while len(cstack) > 1:
                 comp1 = cstack.pop()
                 comp2 = cstack.pop()
@@ -64,6 +63,7 @@ class AnalyzeEngine:
             if type(comp) is DummyComponent:
                 parent.left = comp.left
                 parent.right = comp.right
+                parent.set_dep_rel(comp.get_dep_rel())
             else:
                 parent.left = comp
 

@@ -1,5 +1,5 @@
-from Component import UnprocessedComponent, DummyComponent, RootComponent
-from FaultTree import FaultTree
+from Source.Component import UnprocessedComponent, DummyComponent, RootComponent
+from Source.FaultTree import FaultTree
 
 class ComputeEngine:
     def __init__(self, root, type="Boolean"):
@@ -43,7 +43,6 @@ class ComputeEngine:
             probability = root.left.get_probability()
 
         root.set_probability(probability)
-        print(root.id, root.get_probability())
 
     def display_hierarchical_results(self, name, level=0):
         prefix = "    " * level

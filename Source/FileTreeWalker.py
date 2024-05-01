@@ -2,9 +2,9 @@
 
 import os
 import re
-from Component import UnprocessedComponent
-from AnalyzeEngine import AnalyzeEngine
-from FaultTree import FaultTree
+from Source.Component import UnprocessedComponent
+from Source.AnalyzeEngine import AnalyzeEngine
+from Source.FaultTree import FaultTree
 
 class FileTreeWalker:
     def __init__(self, targetDirectory, fileExtensionsList):

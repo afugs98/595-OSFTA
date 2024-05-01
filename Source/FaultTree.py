@@ -1,6 +1,5 @@
-import Component
 from collections import deque
-from Component import DummyComponent
+from Source.Component import DummyComponent
 
 class FaultTree:
     def __init__(self, root) -> None:
