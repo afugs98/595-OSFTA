@@ -9,12 +9,12 @@
 
 import sys
 import os
-from FileTreeWalker import *
-from ConfigurationManager import *
-from AnalyzeEngine import *
-from Component import *
-from FaultTree import *
-from ComputeEngine import *
+from Source.FileTreeWalker import *
+from Source.ConfigurationManager import *
+from Source.AnalyzeEngine import *
+from Source.Component import *
+from Source.FaultTree import *
+from Source.ComputeEngine import *
 
 class OSFTAManager:
 
