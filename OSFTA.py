@@ -66,17 +66,15 @@ class OSFTAManager:
         # to take the unprocessed tree and run FTA on it
         compute = ComputeEngine(root)
         compute.evaluate(root)
-        return
+        return root
 
 
-    def printOutput(self):
+    def printOutput(self, root):
         # Arnab, this is where you'd integrate the code to
         # print the tree that Sean has made
-
-        pass
-
-
-
+        tree = FaultTree(root)
+        tree.print_tree(root)
+    
 
 # Run the entire OSFTA program
 if __name__ == '__main__':
@@ -98,11 +96,11 @@ if __name__ == '__main__':
     # Build the unprocessed tree
     root = manager.buildUnprocessedTree(dic)
 
-    tree = FaultTree(root)
-    tree.print_tree()
+    # tree = FaultTree(root)
+    # tree.print_tree()
 
     # Process the tree
-    manager.processTree(root)
+    root = manager.processTree(root)
 
     # Print the output
-    manager.printOutput()
+    manager.printOutput(root)

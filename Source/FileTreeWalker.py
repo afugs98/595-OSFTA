@@ -143,7 +143,7 @@ if __name__ == "__main__":
     # Second do the Python example
     inputsRelativePath = os.path.join('..', 'Inputs', 'PythonSatelliteController')  # Path to 'Inputs' from 'Source'
 
-    print(inputsRelativePath)
+    # print(inputsRelativePath)
     
     TreeWalker = FileTreeWalker(os.path.join(currentDirectory, inputsRelativePath), [".py"])    
     dic = TreeWalker.walkDirectoryTree()

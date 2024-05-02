@@ -44,13 +44,5 @@ class ComputeEngine:
 
         root.set_probability(probability)
 
-    def display_hierarchical_results(self, name, level=0):
-        prefix = "    " * level
-        if name in self.gate_results:
-            result = self.gate_results[name]
-            subsystem_info = self.subsystems.get(name)
-            print(f"{prefix}->{name} ({subsystem_info['type']}): {result:.4f}")
-            for component in subsystem_info['components']:
-                self.display_hierarchical_results(component, level + 1)
-        elif name in self.basic_events:
-            print(f"{prefix}->{name}: {self.basic_events[name]:.4f}")
+
+
