@@ -32,6 +32,7 @@ class FileTreeWalker:
             print("Component ID:", parsedCommentDict['id'])
             print("Failure Prob:", parsedCommentDict['failure_probability'])
             print("Dependencies:", parsedCommentDict['dependencies'])
+            print("")
         
             return UnprocessedComponent(id=parsedCommentDict['id'], fail_rate=parsedCommentDict['failure_probability'], unprocessed_dep=parsedCommentDict['dependencies'])
         # This is where we will create objects according to the class structure...
@@ -39,9 +40,8 @@ class FileTreeWalker:
 
     def walkDirectoryTree(self):
         unprocComponents = {}
-        print(self.targetDirectory)
+        
         for root, dirs, files in os.walk(self.targetDirectory):
-            print(files)
             for file in files:
                 if any(file.endswith(ext) for ext in self.fileExtensions):
                     filePath = os.path.join(root, file)

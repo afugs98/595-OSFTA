@@ -4,7 +4,6 @@ class Component:
     def __init__(self, id, fail_rate, left, right, dep_rel) -> None:
         self.id = id
         self.fail_rate = fail_rate
-        # relationships: AND, OR, NOISY AND, NOISY OR
         self.dep_rel = dep_rel
         self.left = left
         self.right = right
@@ -16,9 +15,6 @@ class Component:
     @classmethod
     def get_tree_type(cls):
         return cls.tree_type
-    
-    def add_children(self, node):
-        self.children.append(node)
     
     def compute_fail(self):
         pass
